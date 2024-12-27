@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+/* Adobe Fonts */
+@import url('https://use.typekit.net/fxc4ibe.css');
+
+/* Custom Fonts */
+@font-face {
+  font-family: 'podium';
+  src: url('./fonts/Podium.woff2') format('woff2'),
+       url('./fonts/Podium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'play-pen';
+  src: url('./fonts/PlayPen.woff2') format('woff2'),
+       url('./fonts/PlayPen.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
