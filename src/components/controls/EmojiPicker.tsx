@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Smile } from 'lucide-react';
 import Picker from '@emoji-mart/react';
+import data from '@emoji-mart/data';
 
 interface EmojiPickerProps {
   onEmojiSelect: (emoji: string) => void;
@@ -8,6 +9,11 @@ interface EmojiPickerProps {
 
 export default function EmojiPicker({ onEmojiSelect }: EmojiPickerProps) {
   const [showPicker, setShowPicker] = useState(false);
+
+  const handleEmojiSelect = (emoji: any) => {
+    onEmojiSelect(emoji.native);
+    setShowPicker(false);
+  };
 
   return (
     <div className="relative">
@@ -27,12 +33,9 @@ export default function EmojiPicker({ onEmojiSelect }: EmojiPickerProps) {
               onClick={() => setShowPicker(false)}
             />
             <Picker
-              onEmojiSelect={(emoji: any) => {
-                onEmojiSelect(emoji.native);
-                setShowPicker(false);
-              }}
+              data={data}
+              onEmojiSelect={handleEmojiSelect}
               theme="light"
-              set="apple"
               emojiSize={20}
               emojiButtonSize={28}
               maxFrequentRows={2}

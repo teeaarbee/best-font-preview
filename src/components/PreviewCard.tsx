@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { PreviewSettings } from '../types';
 
 interface PreviewCardProps {
@@ -13,6 +13,15 @@ interface PreviewCardProps {
 }
 
 export default function PreviewCard({ font, settings }: PreviewCardProps) {
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (previewRef.current && window.twemoji) {
+      window.twemoji.parse(previewRef.current);
+    }
+  }, [settings.text]);
+
   const { textShadow } = settings;
   
   const backgroundStyle = settings.imageUrl
@@ -76,14 +85,13 @@ export default function PreviewCard({ font, settings }: PreviewCardProps) {
     <div
       className="relative aspect-square rounded-lg overflow-hidden"
       style={backgroundStyle}
+      ref={previewRef}
     >
       <div className="absolute top-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-sm">
         {font.name}
       </div>
       <div className={getTextContainerClass()}>
-        <p style={textStyle}>
-          {getDisplayText()}
-        </p>
+        <p ref={textRef} style={textStyle}>{getDisplayText()}</p>
       </div>
     </div>
   );
